@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>pl.fitfinder.microservices</groupId>
 	<artifactId>fitfinder.userService</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>fitfinder.userService</name>
 	<description>User service for Fit finder application</description>
 	<properties>
