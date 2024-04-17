@@ -13,6 +13,8 @@ public class User {
     @Id
     @GeneratedValue
     private int id;
+    private String email;
+    private String username;
 
     @OneToMany()
     private List<Gym> favouriteGyms;

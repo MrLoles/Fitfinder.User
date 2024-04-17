@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.fitfinder.microservices.fitfinder.userService.dto.GymDTOAddFavourites;
+import pl.fitfinder.microservices.fitfinder.userService.dto.UserInfo;
 import pl.fitfinder.microservices.fitfinder.userService.exception.exceptions.GymNotFound;
 import pl.fitfinder.microservices.fitfinder.userService.exception.exceptions.UserNotFound;
 import pl.fitfinder.microservices.fitfinder.userService.model.Gym;
@@ -68,5 +69,15 @@ public class UserService {
                 .findFirst();
 
         return existingGym.isPresent();
+    }
+
+    public UserInfo getUserInfo(String token) {
+        int idUser = Integer.parseInt(getUserId(token));
+        User user = userRepository.findById(idUser).orElseThrow(() -> new UserNotFound("No matching user with id:" + idUser));
+
+        UserInfo userInfo = new UserInfo();
+        userInfo.setEmail(user.getEmail());
+        userInfo.setUsername(user.getUsername());
+        return userInfo;
     }
 }
