@@ -87,7 +87,7 @@ public class UserService {
         User user = userRepository.findById(idUser).orElseThrow(() -> new UserNotFound("No matching user with id:" + idUser));
         List<AdministratedGyms> administratedGyms = new ArrayList<>();
 
-        user.getAdministratedGyms().forEach(gym -> administratedGyms.add(new AdministratedGyms(gym.getGymName(), gym.getImgUrl())));
+        user.getAdministratedGyms().forEach(gym -> administratedGyms.add(new AdministratedGyms(gym.getId(), gym.getGymName(), gym.getImgUrl())));
 
         return administratedGyms;
     }

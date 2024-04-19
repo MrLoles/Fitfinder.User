@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class AdministratedGyms {
+    private int id;
     private String gymName;
     private String imgUrl;
 }
