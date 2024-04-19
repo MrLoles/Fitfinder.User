@@ -25,4 +25,12 @@ public class Gym {
     private List<String> openingHours;
 
     private String imgUrl;
+
+    @ManyToMany
+    @JoinTable(
+            name = "gym_administrators",
+            joinColumns = @JoinColumn(name = "gym_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> administrators;
 }

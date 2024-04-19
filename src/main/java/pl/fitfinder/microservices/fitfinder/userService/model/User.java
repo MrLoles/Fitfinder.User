@@ -1,5 +1,6 @@
 package pl.fitfinder.microservices.fitfinder.userService.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,4 +19,8 @@ public class User {
 
     @OneToMany()
     private List<Gym> favouriteGyms;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "administrators")
+    private List<Gym> administratedGyms;
 }

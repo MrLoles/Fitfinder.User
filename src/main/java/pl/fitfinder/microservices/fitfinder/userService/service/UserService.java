@@ -3,7 +3,7 @@ package pl.fitfinder.microservices.fitfinder.userService.service;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
+import pl.fitfinder.microservices.fitfinder.userService.dto.AdministratedGyms;
 import pl.fitfinder.microservices.fitfinder.userService.dto.GymDTOAddFavourites;
 import pl.fitfinder.microservices.fitfinder.userService.dto.UserInfo;
 import pl.fitfinder.microservices.fitfinder.userService.exception.exceptions.GymNotFound;
@@ -13,6 +13,7 @@ import pl.fitfinder.microservices.fitfinder.userService.model.User;
 import pl.fitfinder.microservices.fitfinder.userService.repository.GymRepository;
 import pl.fitfinder.microservices.fitfinder.userService.repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -79,5 +80,15 @@ public class UserService {
         userInfo.setEmail(user.getEmail());
         userInfo.setUsername(user.getUsername());
         return userInfo;
+    }
+
+    public List<AdministratedGyms> getAdministratedGyms(String token) {
+        int idUser = Integer.parseInt(getUserId(token));
+        User user = userRepository.findById(idUser).orElseThrow(() -> new UserNotFound("No matching user with id:" + idUser));
+        List<AdministratedGyms> administratedGyms = new ArrayList<>();
+
+        user.getAdministratedGyms().forEach(gym -> administratedGyms.add(new AdministratedGyms(gym.getId(), gym.getGymName(), gym.getImgUrl())));
+
+        return administratedGyms;
     }
 }
